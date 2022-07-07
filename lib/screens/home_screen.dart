@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:repaso_movies_app/providers/pokemon_provider.dart';
 import 'package:repaso_movies_app/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -6,9 +8,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pokemonsProvider=Provider.of<PokemonProvider>(context);
+    print(pokemonsProvider.onDisplayPokemons);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Movies in Thetres'),
+        title: const Text('101 POKEMONS'),
         elevation: 0,
         actions: [
           IconButton(
@@ -19,9 +24,9 @@ class HomeScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: const [
-            CardSwiper(),
-            MovieSlider(),
+          children:  [
+            CardSwiper(pokemons: pokemonsProvider.onDisplayPokemons,),
+            MovieSlider(pokemons: pokemonsProvider.onDisplayPokemons,),
           ],
         ),
       )

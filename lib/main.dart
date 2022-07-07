@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:repaso_movies_app/providers/pokemon_provider.dart';
 import 'screens/screens.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const AppState());
+
+class AppState extends StatelessWidget {
+  const AppState({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_)=> PokemonProvider(), lazy: false,)
+      ],
+      child: const MyApp(),
+    );
+  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -21,8 +37,8 @@ class MyApp extends StatelessWidget {
         'details': (_) => const DetailScreen()
       },
       theme: ThemeData.light().copyWith(
-        appBarTheme: AppBarTheme(
-          color: Colors.amber[600],
+        appBarTheme: const AppBarTheme(
+          color: Colors.blueGrey,
         )
       ),
     );
